@@ -1,0 +1,95 @@
+// loading news category
+const loadNewsCategory = () => {
+    const url = `https://openapi.programming-hero.com/api/news/categories`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayNewsCategory(data.data.news_category))
+}
+
+// displaying news category
+const displayNewsCategory = catagorys => {
+    const catagoryContainer = document.getElementById('news-category');
+
+    catagorys.forEach(catagory => {
+        const creatDiv = document.createElement('div');
+        creatDiv.innerHTML = `
+        <a onclick="loadNewsDetails('${catagory.category_id}')" href="#news-category" class="text-decoration-none">${catagory.category_name}</a>
+        `;
+        catagoryContainer.appendChild(creatDiv);
+    })
+
+}
+
+// loading news
+const loadNewsDetails = (category_id) => {
+    const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
+    // console.log(category_id)
+    // console.log(url);
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayNewsDetails(data.data))
+}
+
+// displaying news
+const displayNewsDetails = ids => {
+    const cardContainer = document.getElementById('news-container');
+    cardContainer.innerHTML = '';
+
+    // displaying no news found
+    const noNewsFound = document.getElementById('news-found');
+    if (ids.length === 0) {
+        noNewsFound.classList.remove('d-none')
+    }
+    else {
+        noNewsFound.classList.add('d-none');
+    };
+
+    ids.forEach(id => {
+        const cardDiv = document.createElement('div');
+        cardDiv.classList.add('row');
+        cardDiv.classList.add('g-0')
+        cardDiv.innerHTML = `
+        <div class="col-md-3 px-3 py-3">
+            <img src="${id.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-9 px-2">
+            <div class="card-body">
+                <h5 class="news-title">${id.title}</h5>
+                <p class="news-text">${id.details.slice(0, 300)} ...</p>
+
+             <div class="d-lg-flex justify-content-between d-sm-grid">
+                 <div class="d-flex gap-2">
+                     <img class="rounded-circle" src="${id.author.img}" alt="" width="30" height="30">
+                     <p id="journalist">${id.author.name ? id.author.name : 'No author name found'}</p>
+                 </div>
+
+             <div class="d-flex gap-1">
+                 <i class="fa-solid fa-eye mt-1"></i>
+                 <p id="views" class="fw-bold">${id.total_view}</p>
+             </div>
+
+             <div>
+                 <a href=""><i class="fa-solid fa-arrow-right" id="showDetails"></i></a>
+             </div>
+
+             </div>
+            </div>
+        </div>
+        `;
+        cardContainer.appendChild(cardDiv);
+        toggleSpinner(false);
+    })
+}
+
+// spinner
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('spinjner');
+    if (isLoading === true) {
+        loaderSection.classList.remove('d-none');
+    }
+    else {
+        loaderSection.classList.add('d-none');
+    }
+};
+
+loadNewsCategory();
