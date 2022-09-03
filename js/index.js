@@ -121,6 +121,7 @@ const detailsModal = async (newsId) => {
         alert('Error Occured');
     }
 }
+
 // display modal of news details
 const displayDetailsModal = id => {
     id.forEach(modalId => {
@@ -145,7 +146,6 @@ const displayDetailsModal = id => {
 document.getElementById('news-nav').addEventListener('click', function () {
     loadNewsDetails('08');
 });
-
 
 // displaying blog modal
 document.getElementById('blog-nav').addEventListener('click', function () {
