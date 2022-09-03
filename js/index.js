@@ -41,6 +41,10 @@ const displayNewsDetails = ids => {
     const cardContainer = document.getElementById('news-container');
     cardContainer.innerHTML = '';
 
+    // displaying news found in category
+    const numbersOfNews = document.getElementById('numbers-of-data');
+    numbersOfNews.innerText = `${ids.length}`;
+
     // displaying no news found
     const noNewsFound = document.getElementById('news-found');
     if (ids.length === 0) {
@@ -124,6 +128,9 @@ const displayDetailsModal = id => {
           <i class="fa-solid fa-eye mt-1"></i>       
           <p id="views" class="fw-bold">${modalId.total_view ? modalId.total_view : 'no view'} </p>        
         </div>
+        <p><span class="fw-bold">Rating: </span>${modalId.rating.number ? modalId.rating.number : "No review"} <i class="fa-solid fa-star"></i></p>
+        <p><span class="fw-bold">Published Date: </span> ${modalId.author.published_date ? modalId.author.published_date : "Published Date Not Found"}</p>
+        <h5><span class="fw-bold">Review: </span>${modalId.rating.badge ? modalId.rating.badge : "No Review Given"}</h5>
         `
     })
 }
