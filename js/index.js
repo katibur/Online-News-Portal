@@ -23,8 +23,6 @@ const displayNewsCategory = catagorys => {
 // loading news
 const loadNewsDetails = (category_id) => {
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
-    // console.log(category_id)
-    // console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => displayNewsDetails(data.data))
@@ -65,7 +63,7 @@ const displayNewsDetails = ids => {
 
              <div class="d-flex gap-1">
                  <i class="fa-solid fa-eye mt-1"></i>
-                 <p id="views" class="fw-bold">${id.total_view}</p>
+                 <p id="views" class="fw-bold">${id.total_view ? id.total_view : 'no view'}</p>
              </div>
 
              <div>
@@ -91,5 +89,14 @@ const toggleSpinner = isLoading => {
         loaderSection.classList.add('d-none');
     }
 };
+
+// navbar news event handler
+document.getElementById('news-nav').addEventListener('click', function () {
+    fetch(`https://openapi.programming-hero.com/api/news/categories`)
+        .then(response => response.json())
+        .then(data => console.log(data.data.news_category[7]))
+});
+
+
 
 loadNewsCategory();
