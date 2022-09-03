@@ -111,7 +111,22 @@ const detailsModal = async (newsId) => {
         alert('Error Occured');
     }
 }
-
+// display modal
+const displayDetailsModal = id => {
+    id.forEach(modalId => {
+        const modalTitle = document.getElementById('showNewsDetailsModalLabel');
+        modalTitle.innerText = modalId.title;
+        const modalBody = document.getElementById('news-details-modal-body');
+        modalBody.innerHTML = `
+        <img class="img" width="50" height="50" src="${modalId.author.img}" alt="">
+        <p><span class="fw-bold">Author Name: </span> ${modalId.author.name ? modalId.author.name : "No Name"}</p>
+       <div class="d-flex gap-1">
+          <i class="fa-solid fa-eye mt-1"></i>       
+          <p id="views" class="fw-bold">${modalId.total_view ? modalId.total_view : 'no view'} </p>        
+        </div>
+        `
+    })
+}
 
 
 
