@@ -5,7 +5,6 @@ const loadNewsCategory = () => {
         .then(res => res.json())
         .then(data => displayNewsCategory(data.data.news_category))
         .catch(error => console.log(error));
-
 }
 
 // displaying news category
@@ -18,7 +17,6 @@ const displayNewsCategory = catagorys => {
         <a onclick="loadNewsDetails('${catagory.category_id}')" href="#news-category" class="text-decoration-none">${catagory.category_name}</a>
         `;
         catagoryContainer.appendChild(creatDiv);
-
     })
 }
 
@@ -55,6 +53,8 @@ const displayNewsDetails = ids => {
     const noNewsFound = document.getElementById('news-found');
     if (ids.length === 0) {
         noNewsFound.classList.remove('d-none');
+        const numbersOfNews = document.getElementById('numbers-of-data');
+        numbersOfNews.innerText = 'No';
         toggleSpinner(false);
     }
     else {
@@ -109,7 +109,7 @@ const toggleSpinner = isLoading => {
     }
 };
 
-// loading for modal
+// loading for modal of news details
 const detailsModal = async (newsId) => {
     const url = `https://openapi.programming-hero.com/api/news/${newsId}`
     try {
@@ -121,7 +121,7 @@ const detailsModal = async (newsId) => {
         alert('Error Occured');
     }
 }
-// display modal
+// display modal of news details
 const displayDetailsModal = id => {
     id.forEach(modalId => {
         const modalTitle = document.getElementById('showNewsDetailsModalLabel');
@@ -139,10 +139,13 @@ const displayDetailsModal = id => {
         <h5><span class="fw-bold">Review: </span>${modalId.rating.badge ? modalId.rating.badge : "No Review Given"}</h5>
         `
     })
-}
+};
 
+// navbar news eventhandler
 document.getElementById('news-nav').addEventListener('click', function () {
+    loadNewsDetails('08');
+});
 
-})
+
 
 loadNewsCategory();
