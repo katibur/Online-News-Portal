@@ -147,5 +147,59 @@ document.getElementById('news-nav').addEventListener('click', function () {
 });
 
 
+// displaying blog modal
+document.getElementById('blog-nav').addEventListener('click', function () {
+    const blogModalTitle = document.getElementById('FaQModalLabel');
+    blogModalTitle.innerText = "Frequently Asked Questions!!!";
+    const blogModalBody = document.getElementById('FaQModal-body');
+    blogModalBody.innerHTML = `<h3>Question-01: What Are The Differences Between VAR,LET,CONST?</h3>
+     <h5>The Differences Betwenn VAR,LET and CONST are given below:</h5>
+            <p>1. Var declarations are globally scoped or function scoped while let and const are block scoped.<br>
+                2. Var variables can be updated and re-declared within its scope, let variables can be updated but not
+                re-declared, const
+                variables can neither be updated nor re-declared.<br>
+                3. They are all hoisted to the top of their scope but while var variables are initialized with
+                undefined, let and const variables are not initialized.<br>
+                4. While var and let can be declared without being initialized, const must be initialized during
+                declaration.</p>
+                <h3>Question-02: What Are The Differences Between Arrow and Regular Function?</h3>
+            <h5>The Differences Between Arrow and Regular Function are given below</h5>
+            <p>1. Unlike regular functions, arrow functions do not have their own this. The value of this inside an
+                arrow function remains
+                the same throughout the lifecycle of the function and is always bound to the value of this in the
+                closest non-arrow
+                parent function.</p>
+            <p>2. Regular functions created using function declarations or expressions are constructible and callable.
+                Since regular
+                functions are constructible, they can be called using the new keyword.<br>
+                However, the arrow functions are only callable and not constructible, i.e arrow functions can never be
+                used as
+                constructor functions. Hence, they can never be invoked with the new keyword.</p>
+            <h3>Question-03: What Are The Differences Between MAP,FOREACH,FILTER,FIND?</h3>
+              <h5>The Differences Between MAP,FOREACH,FILTER,FIND are given Blow:</h5>
+                <p>1. All of them are used in array.Map,foreach,filter,find will not modify the original array but without foreach all of them can return something.Foreach returns undefined.</p>
+                <p>2. Filter has a condition wheather rest of them has none.</p>
+                <h3>Question-04: Why Should You Use Template-String?</h3>
+            <h5>Here are the reasons of using template-string:</h5>
+            <p>Template strings are a powerful feature of modern JavaScript released in ES6. It lets us
+                insert/interpolate variables and expressions into strings without needing to concatenate like in older
+                versions of JavaScript.It allows us to create strings that are complex and contain dynamic elements.
+                Another great thing that comes with template strings are tags.Tags are functions that take a string and
+                the decomposed parts of the string as parameters and are great for converting strings to different
+                entities.</p>
+            <p>
+                Another great feature of template strings is that we can have strings with multiple lines for better
+                code readability.
+                This cannot be done in an easy way with the old style of strings. With the old style of strings, we had
+                to concatenate
+                each line of the string to put long strings in multiple lines.
+            </p>
+            <p>
+                Template strings can be nested in each other. This is a great feature because many people want to create
+                dynamic
+                strings. Template strings allow us to nest regular strings or template strings within template strings.
+            </p>
+                `;
+})
 
 loadNewsCategory();
