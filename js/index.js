@@ -72,9 +72,9 @@ const displayNewsDetails = ids => {
         <div class="col-md-9 px-2">
             <div class="card-body">
                 <h5 class="news-title">${id.title}</h5>
-                <p class="news-text">${id.details.slice(0, 300)} ...</p>
+                <p class="news-text mb-5">${id.details.slice(0, 700)} ...</p>
 
-             <div class="d-lg-flex justify-content-between d-sm-grid">
+             <div class="d-lg-flex justify-content-between d-sm-grid mt-5 pt-5 pe-5">
                  <div class="d-flex gap-2">
                      <img class="rounded-circle" src="${id.author.img}" alt="" width="30" height="30">
                      <p id="journalist">${id.author.name ? id.author.name : 'No author name found'}</p>
@@ -199,7 +199,7 @@ document.getElementById('blog-nav').addEventListener('click', function () {
                 dynamic
                 strings. Template strings allow us to nest regular strings or template strings within template strings.
             </p>
-                `;
+            `;
 })
 
 loadNewsCategory();
