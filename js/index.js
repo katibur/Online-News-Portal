@@ -4,6 +4,8 @@ const loadNewsCategory = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayNewsCategory(data.data.news_category))
+        .catch(error => console.log(error));
+
 }
 
 // displaying news category
@@ -22,10 +24,16 @@ const displayNewsCategory = catagorys => {
 
 // loading news
 const loadNewsDetails = (category_id) => {
+    toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayNewsDetails(data.data))
+    try {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displayNewsDetails(data.data))
+    }
+    catch (error) {
+        alert('Error Occured');
+    }
 }
 
 // displaying news
@@ -36,7 +44,8 @@ const displayNewsDetails = ids => {
     // displaying no news found
     const noNewsFound = document.getElementById('news-found');
     if (ids.length === 0) {
-        noNewsFound.classList.remove('d-none')
+        noNewsFound.classList.remove('d-none');
+        toggleSpinner(false);
     }
     else {
         noNewsFound.classList.add('d-none');
@@ -45,7 +54,7 @@ const displayNewsDetails = ids => {
     ids.forEach(id => {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('row');
-        cardDiv.classList.add('g-0')
+        cardDiv.classList.add('g-0');
         cardDiv.innerHTML = `
         <div class="col-md-3 px-3 py-3">
             <img src="${id.thumbnail_url}" class="img-fluid rounded-start" alt="...">
@@ -67,12 +76,12 @@ const displayNewsDetails = ids => {
              </div>
 
              <div>
-                 <a href=""><i class="fa-solid fa-arrow-right" id="showDetails"></i></a>
+                 <button onclick="detailsModal('${id._id}')" data-bs-toggle="modal" data-bs-target="#showNewsDetailsModal" class="border border-none bg-light"><i class="fa-solid fa-arrow-right" id="showDetails"></i></button>
              </div>
-
              </div>
             </div>
         </div>
+        <hr>
         `;
         cardContainer.appendChild(cardDiv);
         toggleSpinner(false);
@@ -89,6 +98,26 @@ const toggleSpinner = isLoading => {
         loaderSection.classList.add('d-none');
     }
 };
+
+// loading for modal
+const detailsModal = async (newsId) => {
+    const url = `https://openapi.programming-hero.com/api/news/${newsId}`
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        displayDetailsModal(data.data)
+    }
+    catch (error) {
+        alert('Error Occured');
+    }
+}
+
+
+
+
+
+
+
 
 // navbar news event handler
 document.getElementById('news-nav').addEventListener('click', function () {
